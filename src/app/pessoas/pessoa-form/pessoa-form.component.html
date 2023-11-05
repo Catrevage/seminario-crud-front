@@ -1,0 +1,27 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Dados da Pessoa</mat-card-title>
+  </mat-card-header>
+  
+  <mat-card-content>  
+        <form [formGroup]="form" >
+          
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nome"  formControlName="nome" >    
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <label>Data de Nascimento</label>
+            <input type="date" matInput formControlName="dataNascimento" >    
+          </mat-form-field>
+       
+        
+        </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+
+</mat-card>

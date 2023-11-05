@@ -1,29 +1,59 @@
+
 <mat-card>
 
-  <mat-toolbar color="primary" class="componente">
-    <span>Cadastro de Pessoas</span>
-  </mat-toolbar>
+  <mat-card-content>
+    <mat-toolbar color="primary">
+      <span>Cadastro de Pessoas</span>
+    </mat-toolbar>
+<div *ngIf="pessoas$ | async as pessoas; else loading">
+  <table mat-table [dataSource]="pessoas" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="pessoas" class="mat-elevation-z8 componente">
+    <ng-container matColumnDef="_id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let item"> {{ item.id }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="_id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let item"> {{ item.id }} </td>
-  </ng-container>
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let item"> {{ item.nome }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="nome">
-    <th mat-header-cell *matHeaderCellDef> Nome </th>
-    <td mat-cell *matCellDef="let item"> {{ item.nome }} </td>
-  </ng-container>
+    <ng-container matColumnDef="dataNascimento">
+      <th mat-header-cell *matHeaderCellDef> Data de Nascimento </th>
+      <td mat-cell *matCellDef="let item"> {{ item.dataNascimento }} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="dataNascimento">
-    <th mat-header-cell *matHeaderCellDef> Data de Nascimento </th>
-    <td mat-cell *matCellDef="let item"> {{ item.dataNascimento }} </td>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-mini-fab color="primary" aria-label="Adicionar uma pessoa" (click)="onAdd()">
+          <mat-icon  >add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let item">
+      
+        <button mat-icon-button color="black" aria-label="Editar este Registro"
+        (click)="onEdit(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+       
+        <button mat-icon-button color="warn" aria-label="Excluir este Registro">
+          <mat-icon>delete</mat-icon>
+        </button>
+      
+      </mat-cell>
+      
+    </ng-container>
 
 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<ng-template #loading >
+  <div class="spinner">
+    <mat-spinner ></mat-spinner>
+  </div>
+</ng-template>
+</mat-card-content>
 </mat-card>

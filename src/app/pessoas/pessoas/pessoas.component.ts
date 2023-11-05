@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Pessoa } from '../model/pessoa';
 import { PessoaService } from '../services/pessoa.service';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoas',
@@ -10,12 +11,30 @@ import { Observable } from 'rxjs';
 })
 export class PessoasComponent {
 
-  pessoas: Observable<Pessoa[]>;
-  displayedColumns = ["_id","nome", "dataNascimento"];
+  pessoas$: Observable<Pessoa[]>;
+  displayedColumns = ["_id","nome", "dataNascimento","actions"];
 
 
-  constructor(private pesoaService: PessoaService ){
-    this.pessoas = this.pesoaService.list();
+  constructor(
+    private pesoaService: PessoaService,
+    private router: Router,
+    private route: ActivatedRoute 
+    ){
+    this.pessoas$ = this.pesoaService.list().pipe(
+      catchError(error => {
+        return of([]);
+      })
+
+    );
+
+  }
+
+  onAdd(){
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  onEdit(item: Pessoa){
+    this.router.navigate(['edit', item.id], {relativeTo: this.route})
   }
 
 }
