@@ -18,13 +18,15 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
 import { PessoasComponent } from './pessoas/pessoas.component';
 import { PessoaFormComponent } from './pessoa-form/pessoa-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PessoasListaComponent } from './pessoas-lista/pessoas-lista.component';
 
 
 
 @NgModule({
   declarations: [
     PessoasComponent,
-    PessoaFormComponent
+    PessoaFormComponent,
+    PessoasListaComponent
   ],
   imports: [
     CommonModule,

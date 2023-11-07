@@ -15,7 +15,7 @@ export class PessoaService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute
     ) { }
 
   list() {
@@ -27,9 +27,27 @@ export class PessoaService {
     );
   }
 
-  save(record: Pessoa){
+  loadById(id: string){
+    return this.httpClient.get<Pessoa>(`${this.API}/${id}`);
+  }
+  save(record: Partial<Pessoa>) {
+    if(record.id){
+      return this.update(record);
+    }
+    return this.create(record);
+  }
+
+  private create(record: Partial<Pessoa>){
     var result = this.httpClient.post<Pessoa>(this.API, record).subscribe(result => console.log(result));
     alert("Pessoa Cadastrada com sucesso!");
+    this.router.navigate([''], {relativeTo: this.route});
+    return result;
+
+  }
+
+  private update(record: Partial<Pessoa>){
+    var result = this.httpClient.put<Pessoa>(`${this.API}/${record.id}`, record).subscribe(result => console.log(result));
+    alert("Registro Atualizado Com Sucesso!");
     this.router.navigate([''], {relativeTo: this.route});
     return result;
   }

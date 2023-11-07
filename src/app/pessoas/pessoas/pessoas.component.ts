@@ -12,13 +12,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PessoasComponent {
 
   pessoas$: Observable<Pessoa[]>;
-  displayedColumns = ["_id","nome", "dataNascimento","actions"];
+
 
 
   constructor(
     private pesoaService: PessoaService,
     private router: Router,
-    private route: ActivatedRoute 
+    private route: ActivatedRoute
     ){
     this.pessoas$ = this.pesoaService.list().pipe(
       catchError(error => {

@@ -1,0 +1,44 @@
+<mat-table  [dataSource]="pessoas" >
+
+  <ng-container matColumnDef="_id">
+    <mat-header-cell  *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell  *matCellDef="let item"> {{ item.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nome">
+    <mat-header-cell  *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell  *matCellDef="let item"> {{ item.nome }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="dataNascimento">
+    <mat-header-cell  *matHeaderCellDef> Data de Nascimento </mat-header-cell>
+    <mat-cell  *matCellDef="let item"> {{ item.dataNascimento }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="primary" aria-label="Adicionar uma pessoa" 
+      (click)="onAdd()">
+        <mat-icon  >add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" class="action-column">
+
+      <button mat-icon-button color="black" aria-label="Editar este Registro"
+      (click)="onEdit(item)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" aria-label="Excluir este Registro">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </mat-cell>
+
+  </ng-container>
+
+
+
+  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
