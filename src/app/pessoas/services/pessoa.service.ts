@@ -51,4 +51,11 @@ export class PessoaService {
     this.router.navigate([''], {relativeTo: this.route});
     return result;
   }
+
+  remove(id: string){
+    var result = this.httpClient.delete(`${this.API}/${id}`);
+    alert("Registro Removido Com Sucesso!");
+    return result;
+  }
+
 }

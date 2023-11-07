@@ -12,6 +12,7 @@ export class PessoasListaComponent {
   @Input() pessoas:Pessoa[] = [];
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
+  @Output() delete = new EventEmitter(false);
 
   readonly displayedColumns = ["_id","nome", "dataNascimento","actions"];
 
@@ -27,6 +28,10 @@ export class PessoasListaComponent {
 
   onEdit(item: Pessoa){
     this.edit.emit(item);
+  }
+
+  onDelete(item: Pessoa){
+    this.delete.emit(item);
   }
 
  

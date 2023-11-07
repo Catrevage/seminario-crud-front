@@ -29,12 +29,29 @@ export class PessoasComponent {
 
   }
 
+  refresh(){
+    this.pessoas$ = this.pesoaService.list().pipe(
+      catchError(error => {
+        return of([]);
+      })
+
+    );
+  }
+
   onAdd(){
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 
   onEdit(item: Pessoa){
     this.router.navigate(['edit', item.id], {relativeTo: this.route})
+  }
+  
+  onDelete(item:Pessoa){
+    this.pesoaService.remove(item.id).subscribe(
+        () => {
+          this.refresh();
+        }
+    );
   }
 
 }
